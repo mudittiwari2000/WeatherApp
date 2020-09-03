@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!-- Links -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+  <link rel="stylesheet" type="text/css" href="/assets/stylesheets/styles.css">
+  <link rel="stylesheet" type="text/css" href="assets/stylesheets/weather-icons.min.css">
+  <script type="text/javascript" src="assets/scripts/main.js" defer></script>
+  <script type="text/javascript" src="assets/scripts/currentLocation.js" defer></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="main">
+
+      <div class="input">
+        <input class="search" title="City Name" type="text" name="location" id="location" placeholder="Enter Location"
+          required>
+        <button class="btn submit-btn" title="Get Location"><span class="submit-btn--text">Search</span></button>
+      </div>
+
+      <div class="display">
+        <hr>
+        <h1 class="name dContent"></h1>
+        <i class="wi"></i>
+        <p class="desc dContent"></p>
+        <button class="temp dContent"></button>
+      </div>
+
+
+    </div>
+    <div class="current-location-container">
+      <button class="btn current-location" title="Current Location's Weather">For Current Location</button>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
