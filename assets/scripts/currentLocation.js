@@ -8,7 +8,7 @@ curLocBtn.addEventListener ('click', () => {
 
       lat = position.coords.latitude;
       long = position.coords.longitude;
-      const api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=e23778e3d6ec71b413c096357dd1fc2d`
+      const api = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&appid=e23778e3d6ec71b413c096357dd1fc2d`
 
       fetch (api)
         .then (response => response.json())

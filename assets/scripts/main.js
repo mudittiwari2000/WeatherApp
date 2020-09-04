@@ -1,3 +1,4 @@
+const main = document.querySelector ('.main');
 const input = document.querySelector('.input');
 const button = document.querySelector('.submit-btn');
 const inputValue = document.querySelector('.search');
@@ -7,41 +8,37 @@ const desc = document.querySelector('.desc');
 const temp = document.querySelector('.temp');
 const wicon = document.querySelector('.wi');
 
-let unitValue = 'F';
-let fahrenheit = null;
+let unitValue = 'C';
+let celsius = null;
 
 function putData(data) {
 
   const nameValue = data['name'];
-  const tempValue = Math.floor(
-    (data['main']['temp'] - 273.15) * 9 / 5 + 32
-  );
+  const tempValue = Math.round(data.main.temp);
   const descValue = data['weather'][0]['description'];
   const iconValue = data['weather'][0]['id'];
   const wiconCode = 'wi-owm-' + iconValue;
   name.textContent = nameValue;
   desc.textContent = descValue;
   temp.textContent = `${tempValue} ${unitValue}`;
+
   if (wicon.classList.length > 1) {
     wicon.className = wicon.className.replace(/(\wi-owm).*/g, wiconCode);
   } else {
     wicon.classList.add(wiconCode);
   }
   display.classList.remove('display-hidden');
+  input.classList.add('input-toggle');
+  main.classList.add ('main-toggle');
 }
-
-window.addEventListener('load', () => {
-
-  display.classList.add('display-hidden');
-});
 
 button.addEventListener('click', () => {
 
-  const api = `https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=e23778e3d6ec71b413c096357dd1fc2d`;
+  const api = `https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&units=metric&appid=e23778e3d6ec71b413c096357dd1fc2d`;
   fetch(api)
     .then(response => response.json())
     .then(data => {
-
+      console.log(data);
       putData(data);
     }
     )
@@ -52,20 +49,20 @@ button.addEventListener('click', () => {
 temp.addEventListener('click', () => {
 
   let tempValue = temp.textContent.slice(0, temp.textContent.length - 2);
-  if (fahrenheit === null) {
-    fahrenheit = tempValue;
+  if (celsius === null) {
+    celsius = tempValue;
   }
 
   // To Celsius
-  if (unitValue === 'F') {
-    unitValue = 'C';
-    const celsius = Math.floor(
-      ((5 / 9) * (tempValue - 32))
-    );
-    temp.textContent = celsius + ' ' + unitValue;
-  } else {  // To Fahrenheit
+  if (unitValue === 'C') {
     unitValue = 'F';
+    const fahrenheit = Math.floor(
+      ((celsius * (9/5) + 32))
+    );
     temp.textContent = fahrenheit + ' ' + unitValue;
+  } else {  // To Fahrenheit
+    unitValue = 'C';
+    temp.textContent = celsius + ' ' + unitValue;
   }
 });
 
