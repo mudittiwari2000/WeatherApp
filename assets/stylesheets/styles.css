@@ -1,13 +1,27 @@
-/* Imports */
+/*
+  ============
+    Imports
+  ============
+*/
 @import url(https://fonts.googleapis.com/css?family=Montserrat:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Sans:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic);
 
-
-/* Custom Properties */
+/*
+  =======================
+    CUSTOm PROPERTIES
+  =======================
+*/
 :root {
   --ff-s: 'Montserrat';
-  font-size: 10px;
+  --ff-ss: 'IBM Plex Sans';
+  font-size: 12px;
 }
 
+/*
+  ==========
+    RESETS
+  ==========
+*/
 *,
 *::after,
 *::before {
@@ -36,7 +50,11 @@ input[type=submit] {
   border: none;
 }
 
-/*  generalized */
+/*
+  ================
+    GENERALIZED
+  ================
+*/
 .btn {
   border-radius: .2em;
   background: rgba(35, 44, 51, 0.8);
@@ -54,11 +72,16 @@ hr {
   width: 100%;
 }
 
+/*
+  ==============
+    CONTAINERS
+  ==============
+*/
 .container {
   display: flex;
   flex-direction: column;
   align-content: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
   min-height: 100vh;
   background-image: linear-gradient(to top, rgba(219, 155, 155, 0.4), rgba(104, 179, 240, 0.3)),
@@ -68,7 +91,7 @@ hr {
 }
 
 .main {
-  margin: 5em 5em 1em;
+  margin: 1em 5em 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,6 +106,12 @@ hr {
   box-shadow: 0 10px 20px rgba(51, 51, 51, 0.6);
 }
 
+/*
+  =========
+    MAIN
+  =========
+*/
+/* Input */
 .input {
   border-radius: 1em;
   background: rgba(252, 239, 237, .5);
@@ -131,7 +160,6 @@ hr {
   border-radius: .2em;
 }
 
-
 .submit-btn {
   font-size: 1.5rem;
   display: flex;
@@ -165,11 +193,15 @@ hr {
   display: none;
 }
 
+/*
+  ============
+    DISPLAY
+  ============
+*/
 .display {
   flex: 1 0 0;
   display: flex;
   flex-direction: column;
-  /* flex-wrap: wrap; */
   width: 100%;
   text-align: center;
   color: #12695F;
@@ -180,12 +212,14 @@ hr {
 }
 
 .name-container {
+  font-family: var(--ff-ss);
   max-width: 100%;
 }
 
 .name {
   margin: .3em .5em .2em;
-  font-size: 2.5rem;
+  font-size: 4rem;
+  letter-spacing: .05em;
   font-weight: 600;
   line-height: 1.2;
   overflow-wrap: break-word;
@@ -193,48 +227,122 @@ hr {
   hyphens: auto;
 }
 
-.temp {
-  display: block;
-  width: fit-content;
-  margin: 0 auto;
-  background: transparent;
-  outline: none;
+.date {
+  font-weight: 400;
+  font-size: 2.5rem;
+}
+
+.temp-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.help {
+  margin: auto 0;
+  margin-left: .5em;
+  font-size: 2.5rem;
+  cursor: pointer;
   position: relative;
+  transition: 150ms color ease-out,
+    150ms transform ease-out;
+}
+
+.help:hover,
+.help:focus {
+  color: rgb(84, 136, 119);
+}
+
+.help::after,
+.help::before {
+  --arrow: 20px;
+  --byPx: var(--arrow);
+  --Ytrans: calc(-100% - var(--byPx));
+  --background: rgb(77, 73, 73, .8);
+
+  position: absolute;
+  top: 0;
+  left: -100%;
+}
+
+.help::before {
+  content: attr(data-toolkit);
+  max-width: 80vmin;
+  width: max-content;
+  height: fit-content;
+  cursor: auto;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  background: var(--background);
+  color: #fafafa;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  padding: .5em .5em;
+  border-radius: .5em;
+  transform: translate(-50%, var(--Ytrans)) scale(0);
+  transform-origin: 100% calc(-1 * --byPx);
+  transition: transform 150ms ease-out 100ms;
+  box-shadow: 0 0 10px #333;
+  z-index: 10
+}
+
+.help::after {
+  --byPx: calc(-1 * var(--arrow));
+
+  content: '';
+  left: 50%;
+  background: transparent;
+  transform: translate(-50%, var(--Ytrans));
+  width: 0;
+  height: 0;
+  border: var(--arrow) solid transparent;
+  border-top-color: var(--background);
+  transform: translate(-50%, var(--Ytrans)) scale(0);
+  transform-origin: top;
+  transition: transform 100ms ease-out;
+  z-index: 11;
+}
+
+.help-desktop:hover::before,
+.help-phone::before {
+  transform: translate(-50%, var(--Ytrans)) scale(1);
+  transform-origin: bottom center;
+}
+
+.help-desktop:hover::after,
+.help-phone::after {
+  transform: translate(-50%, var(--Ytrans)) scale(1);
+  transform-origin: top;
+}
+
+.temp {
+  background: transparent;
   font-size: 5rem;
+  transition: transform 150ms ease-out;
+}
+
+.temp:hover,
+.temp:focus {
+  text-shadow: 0 1px 4px rgba(55, 235, 196, 0.6);
+  transform: scaleY(1.05);
 }
 
 .desc {
   font-size: 2rem;
 }
 
-.temp:hover {
-  text-shadow: 0 1px 4px rgba(55, 235, 196, 0.6);
-}
-
-.temp::after {
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-  font-size: 2rem;
-  transform: translateY(-50%);
-  content: '\f06a';
-  color: rgba(55, 235, 196, 0.6);
-  /* text-shadow: 0 0 2px rgba(30, 30, 30, 0.6); */
-  position: absolute;
-  top: 50%;
-  right: -1.5em;
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-}
-
+/* Weather Icon */
 .wi {
   font-size: 6rem;
-  margin-top: .2em;
-  margin-bottom: .2em;
+  margin: .2em auto;
 }
 
+/*
+  =====================
+    CURRENT LOCATION
+  =====================
+*/
 .current-location-container {
   display: flex;
   min-width: 100vw;
@@ -248,9 +356,10 @@ hr {
   line-height: 1.2;
   max-width: 40%;
   text-overflow: ellipsis;
-  border-radius: .2em;
-  padding: .3em .5em;
-  margin-bottom: 1em;
+  border-radius: .3em;
+  padding: .5em .5em;
+  margin-top: 2em;
+  margin-bottom: .5em;
   margin-right: .5em;
   position: relative;
 }
@@ -306,5 +415,9 @@ hr {
     display: inline-block;
     padding: 0 .1em;
     text-overflow: ellipsis;
+  }
+
+  .wi {
+    margin-bottom: -.2em;
   }
 }

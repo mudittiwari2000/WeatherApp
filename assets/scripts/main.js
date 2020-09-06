@@ -1,54 +1,88 @@
-const main = document.querySelector ('.main');
+// Selectors
+const main = document.querySelector('.main');
 const input = document.querySelector('.input');
 const button = document.querySelector('.submit-btn');
 const inputValue = document.querySelector('.search');
 const display = document.querySelector('.display');
 const name = document.querySelector('.name');
+const date = document.querySelector('.date');
 const desc = document.querySelector('.desc');
 const temp = document.querySelector('.temp');
 const wicon = document.querySelector('.wi');
+const help = document.querySelector('.help');
 
+// Value containers
+const thresholdWidth = 700;
 let unitValue = 'C';
 let celsius = null;
 
+// Putting data into display
 function putData(data) {
 
-  const nameValue = data['name'];
+  const nameValue = `${data.name}, ${data.sys.country}`;
   const tempValue = Math.round(data.main.temp);
-  const descValue = data['weather'][0]['description'];
-  const iconValue = data['weather'][0]['id'];
+  const descValue = data.weather[0].description;
+  const iconValue = data.weather[0].id;
   const wiconCode = 'wi-owm-' + iconValue;
-  name.textContent = nameValue;
-  desc.textContent = descValue;
-  temp.textContent = `${tempValue} ${unitValue}`;
 
+  // Putting data in HTML
+  name.textContent = nameValue;
+  putDate();
+  desc.textContent = descValue;
+  temp.innerHTML = `${tempValue} <span style='font-size: 3rem; vertical-align: text-top; margin-top: -5px'>&#176;</span>${unitValue}`;
+
+  // Toggling different weather icons accordingly
   if (wicon.classList.length > 1) {
     wicon.className = wicon.className.replace(/(\wi-owm).*/g, wiconCode);
   } else {
     wicon.classList.add(wiconCode);
   }
+
+  // Toggle display
   display.classList.remove('display-hidden');
   input.classList.add('input-toggle');
-  main.classList.add ('main-toggle');
+  main.classList.add('main-toggle');
+}
+
+function putDate() {
+
+  const today = new Date();
+  const month_long = ["January", "February", "March", "April", "May", "June", "July",
+    "August", "September", "October", "November", "December"];
+  const monthL = month_long[today.getMonth()];
+  const month_short = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const monthS = month_short[today.getMonth()];
+  const week_long = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const weekL = week_long[today.getDay()];
+  const week_short = ["Sun", "Mon", "Tues", "Wed", "thurs", "Fri", "Sat"]
+  const weekS = week_short[today.getDay()];
+  const date_ = today.getDate();
+
+  if (window.innerWidth >= thresholdWidth) {
+    date.textContent = `${weekL}, ${date_} ${monthL}`;
+  } else {
+    date.textContent = `${weekS}, ${date_} ${monthS}`;
+  }
 }
 
 button.addEventListener('click', () => {
 
   const api = `https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&units=metric&appid=e23778e3d6ec71b413c096357dd1fc2d`;
+
   fetch(api)
     .then(response => response.json())
     .then(data => {
-      console.log(data);
-      putData(data);
-    }
-    )
 
+      putData(data);
+    })
     .catch(err => alert('Something went wrong!'))
 });
 
+// Temperature toggle event
 temp.addEventListener('click', () => {
 
   let tempValue = temp.textContent.slice(0, temp.textContent.length - 2);
+  console.log(temp.textContent);
   if (celsius === null) {
     celsius = tempValue;
   }
@@ -57,12 +91,14 @@ temp.addEventListener('click', () => {
   if (unitValue === 'C') {
     unitValue = 'F';
     const fahrenheit = Math.floor(
-      ((celsius * (9/5) + 32))
+      ((celsius * (9 / 5) + 32))
     );
-    temp.textContent = fahrenheit + ' ' + unitValue;
-  } else {  // To Fahrenheit
+    temp.innerHTML = `${fahrenheit} <span style='font-size: 3rem; vertical-align: text-top; margin-top: -5px'>&#176;</span>${unitValue}`;
+  }
+  // To Fahrenheit
+  else {
     unitValue = 'C';
-    temp.textContent = celsius + ' ' + unitValue;
+    temp.innerHTML = `${celsius} <span style='font-size: 3rem; vertical-align: text-top; margin-top: -5px'>&#176;</span>${unitValue}`;
   }
 });
 
@@ -72,5 +108,14 @@ inputValue.addEventListener('keyup', event => {
   if (event.key === 'Enter') {
     event.preventDefault();
     button.click();
+  }
+});
+
+// Toggle help on desktop by hover, and click on phone
+help.addEventListener('click', e => {
+
+  if (window.innerWidth <= thresholdWidth) {
+
+    help.classList.toggle('help-phone');
   }
 });

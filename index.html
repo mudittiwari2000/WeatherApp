@@ -7,12 +7,9 @@
   <title>Weather App</title>
 
   <!-- Links -->
-  <link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
-    crossorigin="anonymous" />
   <link rel="stylesheet" type="text/css" href="assets/stylesheets/styles.css">
   <link rel="stylesheet" type="text/css" href="assets/stylesheets/weather-icons.min.css">
+  <script src="https://kit.fontawesome.com/9310d6db9c.js" defer crossorigin="anonymous"></script>
   <script type="text/javascript" src="assets/scripts/main.js" defer></script>
   <script type="text/javascript" src="assets/scripts/currentLocation.js" defer></script>
 </head>
@@ -20,6 +17,12 @@
 <body>
 
   <div class="container">
+
+
+    <div class="current-location-container">
+      <button class="btn current-location" title="Current Location's Weather">For Current Location</button>
+    </div>
+
     <div class="main">
 
       <div class="input">
@@ -29,19 +32,26 @@
       </div>
 
       <div class="display display-hidden">
+
         <hr>
+
         <div class="name-container">
           <h1 class="name"></h1>
+          <h3 class="date"></h3>
         </div>
-        <button class="temp"></button>
+
+        <div class="temp-container">
+          <button class="temp"></button>
+          <span class="help help-desktop" data-toolkit='Click to view the temperature in Fahrenheit/Celsius'>
+            <i class="fas fa-exclamation-circle"></i>
+          </span>
+        </div>
+
         <p class="desc"></p>
+        <!-- Weather Icon -->
         <i class="wi"></i>
       </div>
 
-
-    </div>
-    <div class="current-location-container">
-      <button class="btn current-location" title="Current Location's Weather">For Current Location</button>
     </div>
 
   </div>
