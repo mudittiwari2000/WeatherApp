@@ -19,17 +19,19 @@ let celsius = null;
 // Putting data into display
 function putData(data) {
 
-  const nameValue = `${data.name}, ${data.sys.country}`;
-  const tempValue = Math.round(data.main.temp);
+  const nameValue = data.name;
+  const countryAlpha2 = data.sys.country;
   const descValue = data.weather[0].description;
   const iconValue = data.weather[0].id;
   const wiconCode = 'wi-owm-' + iconValue;
+  celsius = Math.round(data.main.temp);
+  unitValue = 'C';
 
   // Putting data in HTML
-  name.textContent = nameValue;
+  name.textContent = `${nameValue}, ${countryAlpha2}`;
   putDate();
   desc.textContent = descValue;
-  temp.innerHTML = `${tempValue} <span style='font-size: 3rem; vertical-align: text-top; margin-top: -5px'>&#176;</span>${unitValue}`;
+  temp.innerHTML = `${celsius} <span style='font-size: 3rem; vertical-align: text-top; margin-top: -5px'>&#176;</span>${unitValue}`;
 
   // Toggling different weather icons accordingly
   if (wicon.classList.length > 1) {
@@ -81,23 +83,20 @@ button.addEventListener('click', () => {
 // Temperature toggle event
 temp.addEventListener('click', () => {
 
-  let tempValue = temp.textContent.slice(0, temp.textContent.length - 2);
-  console.log(temp.textContent);
-  if (celsius === null) {
-    celsius = tempValue;
-  }
-
   // To Celsius
   if (unitValue === 'C') {
     unitValue = 'F';
-    const fahrenheit = Math.floor(
-      ((celsius * (9 / 5) + 32))
+    fahrenheit = Math.round(
+      (celsius * (9 / 5) + 32)
     );
     temp.innerHTML = `${fahrenheit} <span style='font-size: 3rem; vertical-align: text-top; margin-top: -5px'>&#176;</span>${unitValue}`;
   }
   // To Fahrenheit
   else {
     unitValue = 'C';
+    celsius = Math.round(
+      ((fahrenheit - 32) * (5 / 9))
+    );
     temp.innerHTML = `${celsius} <span style='font-size: 3rem; vertical-align: text-top; margin-top: -5px'>&#176;</span>${unitValue}`;
   }
 });
