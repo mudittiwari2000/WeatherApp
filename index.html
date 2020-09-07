@@ -15,9 +15,22 @@
 </head>
 
 <body>
+  <div class="overlay overlay-hidden">
+    <div class="modal modal-error">
+      <div class="modal-header-container">
+        <h3 class="modal-header">Error!</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <hr>
+      <div class="modal-content">
+        No such location!
+        <br>
+        Did you spell the City's Name right?
+      </div>
+    </div>
+  </div>
 
   <div class="container">
-
 
     <div class="current-location-container">
       <button class="btn current-location" title="Current Location's Weather">For Current Location</button>
@@ -26,7 +39,7 @@
     <div class="main">
 
       <div class="input">
-        <input class="search" title="City Name" type="text" name="location" id="location" placeholder="Enter Location"
+        <input class="search" title="City Name" type="text" name="location" id="location" placeholder="Enter the City's Name"
           required>
         <button class="btn submit-btn" title="Get Location"><span class="submit-btn--text">Search</span></button>
       </div>

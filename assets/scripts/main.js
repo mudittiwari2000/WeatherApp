@@ -10,6 +10,8 @@ const desc = document.querySelector('.desc');
 const temp = document.querySelector('.temp');
 const wicon = document.querySelector('.wi');
 const help = document.querySelector('.help');
+const overlay = document.querySelector('.overlay');
+const closeButton = document.querySelector('.overlay .close-btn');
 
 // Value containers
 const thresholdWidth = 700;
@@ -77,7 +79,17 @@ button.addEventListener('click', () => {
 
       putData(data);
     })
-    .catch(err => alert('Something went wrong!'))
+    .catch(err => {
+      overlay.classList.remove('overlay-hidden');
+
+      closeButton.addEventListener('click', () => {
+        overlay.classList.add('overlay-hidden');
+      });
+
+      overlay.addEventListener('click', () => {
+        overlay.classList.add('overlay-hidden');
+      });
+    })
 });
 
 // Temperature toggle event

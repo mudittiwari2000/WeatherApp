@@ -385,6 +385,70 @@ hr {
   transform-origin: left;
 }
 
+/*
+  ===========
+    MODALS
+  ===========
+*/
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(184, 171, 171, 0.6);
+  z-index: 20;
+}
+
+.overlay-hidden {
+  display: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(221, 216, 216, 0.774);
+  border-radius: .5em;
+  box-shadow: 0 0 20px #333;
+  padding: .2em 0;
+  font-size: 1.5rem;
+  color: #12695F;
+}
+
+.modal hr {
+  width: 100%;
+  border: none;
+  border-top: 1px solid rgba(41, 40, 40, 0.8);
+}
+
+.modal-header-container {
+  position: relative;
+}
+
+.modal-header {
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
+.close-btn {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  color: #12695F;
+  font-size: 3.5rem;
+}
+
+
+.modal-content {
+  width: 90%;
+  overflow-wrap: break-word;
+  margin: 0 auto;
+  padding: .2em .5em;
+  text-align: center;
+}
+
 @media (min-width: 700px) {
 
   :root {
@@ -392,6 +456,8 @@ hr {
   }
 
   .main {
+    margin: 0 auto;
+    width: 60%;
     text-align: center;
   }
 
@@ -415,9 +481,5 @@ hr {
     display: inline-block;
     padding: 0 .1em;
     text-overflow: ellipsis;
-  }
-
-  .wi {
-    margin-bottom: -.2em;
   }
 }
