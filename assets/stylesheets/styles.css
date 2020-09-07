@@ -402,7 +402,7 @@ hr {
   display: none;
 }
 
-.overlay-hidden .modal {
+.modal-hidden {
   display: none;
 }
 

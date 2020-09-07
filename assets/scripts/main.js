@@ -11,6 +11,7 @@ const temp = document.querySelector('.temp');
 const wicon = document.querySelector('.wi');
 const help = document.querySelector('.help');
 const overlay = document.querySelector('.overlay');
+const modal = document.querySelector('.modal');
 const closeButton = document.querySelector('.overlay .close-btn');
 
 // Value containers
@@ -81,13 +82,16 @@ button.addEventListener('click', () => {
     })
     .catch(err => {
       overlay.classList.remove('overlay-hidden');
+      modal.classList.remove('overlay-hidden');
 
       closeButton.addEventListener('click', () => {
         overlay.classList.add('overlay-hidden');
+        modal.classList.add('overlay-hidden');
       });
 
       overlay.addEventListener('click', () => {
         overlay.classList.add('overlay-hidden');
+        modal.classList.add('overlay-hidden');
       });
     })
 });
