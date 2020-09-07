@@ -402,6 +402,10 @@ hr {
   display: none;
 }
 
+.overlay-hidden .modal {
+  display: none;
+}
+
 .modal {
   position: absolute;
   top: 50%;
