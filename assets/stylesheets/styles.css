@@ -437,6 +437,9 @@ hr {
 .modal-header {
   text-align: center;
   overflow-wrap: break-word;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .close-btn {
@@ -449,13 +452,23 @@ hr {
   font-size: 3.5rem;
 }
 
-
 .modal-content {
   width: 90%;
   overflow-wrap: break-word;
   margin: 0 auto;
   padding: .2em .5em;
   text-align: center;
+}
+
+.content-head {
+  padding: 0 auto .5em;
+  font-size: 2rem;
+  font-weight: 500;
+  font-style: oblique;
+}
+
+.content-main {
+  margin: .5em auto .2em;
 }
 
 @media (min-width: 700px) {
