@@ -12,6 +12,7 @@ const wicon = document.querySelector('.wi');
 const help = document.querySelector('.help');
 const overlay = document.querySelector('.overlay');
 const modal = document.querySelector('.modal');
+const modalContent_main = document.querySelector('.modal-content .content-main');
 const closeButton = document.querySelector('.overlay .close-btn');
 
 // Value containers
@@ -81,6 +82,11 @@ button.addEventListener('click', () => {
       putData(data);
     })
     .catch(err => {
+
+      if (!inputValue.value.length) {
+        modalContent_main.innerHTML = "Please Enter a City's Name mademoiselle~"
+      }
+
       overlay.classList.remove('overlay-hidden');
       modal.classList.remove('overlay-hidden');
 
@@ -132,5 +138,9 @@ help.addEventListener('click', e => {
   if (window.innerWidth <= thresholdWidth) {
 
     help.classList.toggle('help-phone');
+    help.classList.toggle('help-hidden');
+    help.classList.remove('help-desktop');
+  } else {
+    help.classList.add('help-desktop');
   }
 });
